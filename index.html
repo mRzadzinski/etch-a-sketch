@@ -1,0 +1,53 @@
+<!-- Etch-a-sketch impressionist mode -->
+<!-- Highly visible mode switch -->
+<!-- Toggle mode buttons (on sides), remove irrelevant options (e.g. picking your color, black and white colors) -->
+<!-- Different background and frame colors -->
+<!-- TO DO -->
+
+<!-- Color palette, grid inside a frame https://artis-dev.github.io/etch-a-sketch/ -->
+<!-- Toggle grid lines https://bscottnz.github.io/esketch/ -->
+<!-- Shadows, mouseover effects https://michalosman.github.io/etch-a-sketch/ -->
+<!-- Rectangle grid, not square -->
+<!-- Pick your color, rainbow mode (set palette), +10% black, +10% white, eraser -->
+<!-- Grid size slider -->
+<!-- Drawing area centered -->
+<!-- +10% black / white in intervals while mousedown -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script defer src="./js.js"></script>
+    <title>Etch a sketch</title>
+
+</head>
+    <body>
+        <div></div>
+
+        <div class="container">
+            <div class="top">
+                <div></div>
+                <div class="controls">Controls</div>
+                <input class="slider" id="myRange" type="range" min="16" max="100" value="16">
+            </div>
+
+            <div class="middle">
+                <div class="left"></div>
+                <div class="grid"></div>
+                <div class="right"></div>
+            </div>
+
+            <div class="bottom">Etch A Sketch</div>
+        </div>
+
+        <div class="footer">
+            Copyright © 2022 Maciej Rzadzinski&nbsp&nbsp;
+            <a href="https://github.com/mRzadzinski/rock-paper-scissors">
+                <img id="github" src="./img/github.png" alt="github">
+            </a>
+        </div>
+    </body>
+</html>
