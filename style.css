@@ -76,16 +76,16 @@ body {
 }
 
 .slider:hover {
-    opacity: 1;
+    opacity: 0.8;
 }
 
 .slider::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Override default look */
+    -webkit-appearance: none;
     appearance: none;
     width: 60px;
     height: 60px;
     border-radius: 60px;
-    background: #8f0000;
+    background: #b60101;
 }
 
 .bottom {
