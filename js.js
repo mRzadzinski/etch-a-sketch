@@ -1,3 +1,41 @@
+// Create grid
+const gridContainer = document.querySelector('.grid-container');
+const rowContainer = document.createElement('div');
+const div = document.createElement('div');
+
+rowContainer.classList.add('row-container');
+div.classList.add('grid-square');
+
+
+function createGrid(value) {
+    // Check values's parity
+    let a = value;
+    if (a % 2 !== 0) {
+        a += 1;
+    }
+    // Loop to create grid
+    for (let i = 0; i < value; i++) {
+        gridContainer.appendChild(rowContainer.cloneNode());
+        for (let j = 0; j < (value * 1.5); j++) {
+            gridContainer.lastChild.appendChild(div.cloneNode());
+        }
+    }
+}
+
+function removeGrid() {
+    gridContainer.innerHTML = '';
+}
+
+// Get slider value
+let slider = document.querySelector('.slider');
+let sliderValue = slider.value;
+createGrid(sliderValue);
+
+slider.onchange = function() {
+    sliderValue = this.value;
+    removeGrid();
+    createGrid(sliderValue);
+}
 
 
 

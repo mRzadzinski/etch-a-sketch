@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&family=Roboto:wght@300&display=swap');
+
 body {
     background-color: gray;
     display: flex;
@@ -47,10 +49,25 @@ body {
     justify-content: center;
 }
 
-.grid {
+.grid-container {
+    display: flex;
+    flex-direction: column;
     height: 637.5px;
     width: 988px;
-    background-color: white;
+    background-color: rgb(195, 195, 195);
+    border-bottom: 1px solid rgb(165, 165, 165);
+    border-right: 1px solid rgb(165, 165, 165);
+}
+
+.row-container {
+    display: flex;
+    flex: 1;
+}
+
+.grid-square {
+    border: solid 1px rgb(165, 165, 165);
+    flex: 1;
+    margin: 0 -1px -1px 0;
 }
 
 .right {
@@ -98,7 +115,8 @@ body {
 }
 
 .bottom {
-    font-size: 37.5px;
+    font-size: 65px;
+    font-family: 'Patrick Hand SC', cursive;
 }
 
 
@@ -114,7 +132,9 @@ body {
     width: 100vw;
     text-align: center;
     font-size: 15px;
+    font-family: 'Roboto', sans-serif;
 }
+    
 
 #github {
     height: 3vh;
@@ -126,5 +146,5 @@ body {
 }
 
 .git {
-    transform: scale(1.2) rotate(1turn);
+    transform: scale(1.1) rotate(1turn);
 }
