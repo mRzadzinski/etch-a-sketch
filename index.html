@@ -27,25 +27,28 @@
         <div class="container">
 
             <div class="top">
-                <div>
-                    <img id="rainbow" src="./img/rainbow.png" alt="choose-color">
+                <div class="color-picker-wrapper">
+                    <input class="color-picker normal-mode" type="color" name="color-picker" value="#b60101">
                 </div>
+
                 <div class="toggle-container">
-                    <div class="normal">normal</div>
+                    <div class="normal">NORMAL</div>
                     <div class="switch-container">
                         <label class="switch">
                             <input type="checkbox">
                             <span class="toggle round"></span>
                         </label>
                     </div>
-                    <div class="impressionist">impressionist</div>
+                    <div class="impressionist">IMPRESSIONIST</div>
                 </div>
                 
                 <input class="slider" type="range" min="16" max="64" value="16">
             </div>
 
             <div class="middle">
-                <div class="left"></div>
+                <div class="left">
+                    <div class="instruction normal-mode">PICK <br> COLOR</div>
+                </div>
                 <div class="grid-container"></div>
                 <div class="right"></div>
             </div>

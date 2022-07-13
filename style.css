@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&family=Prompt&family=Roboto:wght@300&display=swap');
 
 body {
     background-color: gray;
@@ -13,6 +13,7 @@ body {
     min-height: 847px;
     min-width: 1155px;
     text-align: center;
+    font-family: 'Prompt', sans-serif;
 }
 
 .container {
@@ -41,10 +42,9 @@ body {
 .toggle-container {
     display: flex;
     align-items: center;
-    gap: 30px;
-    margin-right: -254px;
-    font-family: 'Patrick Hand SC', cursive;
-    font-size: 40px;
+    gap: 15px;
+    margin-right: -213px;
+    font-size: 20px;
 }
 
 .switch-container {
@@ -53,18 +53,33 @@ body {
     align-items: center;
 }
 
-.normal,
-.impressionist {
-    margin-bottom: 8px;
-}
-
-
-#rainbow {
+input.color-picker {
     height: 60px;
     width: 60px;
     border-radius: 60px;
-    margin: 20px 0 0 20px;
+    border: none;
+    opacity: 0;
+}
 
+.color-picker-wrapper {
+    height: 60px;
+    width: 60px;
+    border-radius: 60px;
+    margin: 15px 0 0 16px;
+    opacity: 0.7;
+    transition: 0.1s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.color-picker-wrapper:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+input[type="color"] {
+	-webkit-appearance: none;
+    appearance: none;
+	border: none;
 }
 
 .left,
@@ -75,6 +90,12 @@ body {
 
 .left {
     width: 94px;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+.instruction {
+    margin-top: -2px;
 }
 
 .middle {
@@ -175,7 +196,7 @@ body {
 }
 
 .git {
-    transform: scale(1.1) rotate(1turn);
+    transform: scale(1.1);
 }
 
 /* Slider */
@@ -185,6 +206,7 @@ body {
     display: inline-block;
     width: 90px;
     height: 25px;
+    opacity: 0.7;
   }
   
   /* Hide default HTML checkbox */
@@ -202,7 +224,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgb(167, 137, 0);
+    background-color: rgb(122, 122, 122);
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -214,13 +236,13 @@ body {
     width: 18px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: #b60101;
     -webkit-transition: .4s;
     transition: .4s;
   }
   
   input:checked + .toggle {
-    background-color: #b60101;
+    background-color: #bcbcbc;
   }
   
   input:checked + .toggle:before {

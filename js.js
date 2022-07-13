@@ -42,7 +42,15 @@ slider.onchange = function() {
 
 
 
+// Update color picker color
+const colorPickerWrapper = document.querySelector('.color-picker-wrapper');
+const colorPicker = document.querySelector('.color-picker');
 
+colorPickerWrapper.style.backgroundColor = colorPicker.value;
+colorPicker.onchange = function() {
+    colorPickerWrapper.style.backgroundColor = colorPicker.value;
+
+}
 
 
 // Github icon animation
