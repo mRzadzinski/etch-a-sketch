@@ -5,7 +5,6 @@
 <!-- TO DO -->
 
 <!-- Color palette, grid inside a frame https://artis-dev.github.io/etch-a-sketch/ -->
-<!-- Toggle grid lines https://bscottnz.github.io/esketch/ -->
 <!-- Shadows, mouseover effects https://michalosman.github.io/etch-a-sketch/ -->
 <!-- Pick your color, rainbow mode (set palette), +10% black, +10% white, eraser -->
 <!-- +10% black / white in intervals while mousedown -->
@@ -27,18 +26,19 @@
         <div class="container">
 
             <div class="top">
-                <div class="color-picker-wrapper">
-                    <input class="color-picker normal-mode" type="color" name="color-picker" value="#b60101">
-                </div>
+                <div></div>
 
                 <div class="toggle-container">
+
                     <div class="normal">NORMAL</div>
+
                     <div class="switch-container">
                         <label class="switch">
                             <input type="checkbox">
                             <span class="toggle round"></span>
                         </label>
                     </div>
+
                     <div class="impressionist">IMPRESSIONIST</div>
                 </div>
                 
@@ -46,9 +46,21 @@
             </div>
 
             <div class="middle">
+
                 <div class="left">
-                    <div class="instruction normal-mode">PICK <br> COLOR</div>
+                    <div>
+                        <div class="color-picker-wrapper">
+                            <input class="color-picker normal-mode" type="color" name="color-picker" value="#464646">
+                        </div>
+                        <div class="instruction normal-mode">PICK <br> COLOR</div>
+                    </div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    
+                    
                 </div>
+
                 <div class="grid-container"></div>
                 <div class="right"></div>
             </div>
@@ -58,7 +70,7 @@
 
         <div class="footer">
             Copyright © 2022 Maciej Rzadzinski&nbsp&nbsp;
-            <a href="https://github.com/mRzadzinski/rock-paper-scissors">
+            <a href="https://github.com/mRzadzinski/etch-a-sketch">
                 <img id="github" src="./img/github.png" alt="github">
             </a>
         </div>
