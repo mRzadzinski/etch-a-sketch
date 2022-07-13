@@ -7,10 +7,7 @@
 <!-- Color palette, grid inside a frame https://artis-dev.github.io/etch-a-sketch/ -->
 <!-- Toggle grid lines https://bscottnz.github.io/esketch/ -->
 <!-- Shadows, mouseover effects https://michalosman.github.io/etch-a-sketch/ -->
-<!-- Rectangle grid, not square -->
 <!-- Pick your color, rainbow mode (set palette), +10% black, +10% white, eraser -->
-<!-- Grid size slider -->
-<!-- Drawing area centered -->
 <!-- +10% black / white in intervals while mousedown -->
 
 <!DOCTYPE html>
@@ -21,16 +18,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <script defer src="./js.js"></script>
-    <title>Etch a sketch</title>
+    <title>Etch A Sketch</title>
 
 </head>
     <body>
         <div></div>
 
         <div class="container">
+
             <div class="top">
-                <div></div>
-                <div class="controls">Controls</div>
+                <div>
+                    <img id="rainbow" src="./img/rainbow.png" alt="choose-color">
+                </div>
+                <div class="toggle-container">
+                    <div class="normal">normal</div>
+                    <div class="switch-container">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="toggle round"></span>
+                        </label>
+                    </div>
+                    <div class="impressionist">impressionist</div>
+                </div>
+                
                 <input class="slider" type="range" min="16" max="64" value="16">
             </div>
 

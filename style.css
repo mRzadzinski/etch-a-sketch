@@ -38,10 +38,43 @@ body {
     font-size: 28px;
 }
 
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-right: -254px;
+    font-family: 'Patrick Hand SC', cursive;
+    font-size: 40px;
+}
+
+.switch-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.normal,
+.impressionist {
+    margin-bottom: 8px;
+}
+
+
+#rainbow {
+    height: 60px;
+    width: 60px;
+    border-radius: 60px;
+    margin: 20px 0 0 20px;
+
+}
+
 .left,
 .right {
     width: 83.5px;
     height: 637.5px;
+}
+
+.left {
+    width: 94px;
 }
 
 .middle {
@@ -74,10 +107,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.controls {
-    margin-right: -225px;
 }
 
 .slider {
@@ -148,3 +177,63 @@ body {
 .git {
     transform: scale(1.1) rotate(1turn);
 }
+
+/* Slider */
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 90px;
+    height: 25px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .toggle {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(167, 137, 0);
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .toggle:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .toggle {
+    background-color: #b60101;
+  }
+  
+  input:checked + .toggle:before {
+    -webkit-transform: translateX(64px);
+    -ms-transform: translateX(64px);
+    transform: translateX(64px);
+  }
+  
+  /* Rounded sliders */
+  .toggle.round {
+    border-radius: 34px;
+  }
+  
+  .toggle.round:before {
+    border-radius: 50%;
+  }
