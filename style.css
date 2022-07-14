@@ -35,15 +35,15 @@ body {
 }
 
 .top {
-    justify-content: space-between;
-    font-size: 28px;
+    font-size: 65px;
+    font-family: 'Patrick Hand SC', cursive;
 }
 
 .toggle-container {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-right: -270px;
+    gap: 7px;
+    margin-right: -373px;
     font-size: 20px;
 }
 
@@ -63,23 +63,50 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
     width: 94px;
     font-size: 16px;
     line-height: 1.2;
 }
 
-.color-picker-wrapper {
+.buttons {
     height: 60px;
     width: 60px;
     border-radius: 60px;
     opacity: 0.7;
     transition: 0.1s;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.5);
+    background-color: #a1a1a1;
 }
 
-.color-picker-wrapper:hover {
+.buttons:hover {
     opacity: 1;
     transform: scale(1.05);
+}
+
+.buttons:active {
+    transform: scale(1);
+}
+
+.arrow {
+    height: 60%;
+    width: 60%;
+}
+
+.arrow.up {
+    margin-top: 10px;
+    transform: rotate(-90deg);
+}
+
+.arrow.down {
+    transform: rotate(90deg);
+    margin-top: 14px;
+}
+
+#eraser {
+    width: 70%;
+    height: 70%;
+    margin: 8px 3px 0 0;
 }
 
 input.color-picker {
@@ -139,7 +166,7 @@ input[type="color"] {
     transform: rotate(270deg);
     width: 450px;
     height: 7.5px;
-    margin: 727.5px -184.5px 0 0;
+    margin: -727.5px -184.5px 0 0;
     border-radius: 6px;
     opacity: 0.7;
 }
@@ -157,7 +184,6 @@ input[type="color"] {
     height: 45px;
     border-radius: 45px;
     background: #b60101;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.3);
 }
 
 .slider::-moz-slider-thumb {
@@ -165,12 +191,11 @@ input[type="color"] {
     height: 45px;
     border-radius: 45px;
     background: #b60101;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.3);
 }
 
 .bottom {
-    font-size: 65px;
-    font-family: 'Patrick Hand SC', cursive;
+    justify-content: space-between;
+    font-size: 28px;
 }
 
 
@@ -191,24 +216,21 @@ input[type="color"] {
     
 
 #github {
-    height: 3vh;
-    width: 3vh;
-    min-height: 13.5px;
-    min-width: 13.5px;
+    height: 27px;
+    width: 27px;
     padding-bottom: 0.2vh;
     transition: 0.3s;
 }
 
-.git {
+#github:hover {
     transform: scale(1.1);
 }
 
-/* Slider */
 /* The switch - the box around the slider */
 .switch {
     position: relative;
     display: inline-block;
-    width: 90px;
+    width: 50px;
     height: 25px;
     opacity: 0.7;
   }
@@ -243,7 +265,6 @@ input[type="color"] {
     background-color: #b60101;
     -webkit-transition: .4s;
     transition: .4s;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 1px 3px 0 rgba(0, 0, 0, 0.5);
   }
   
   input:checked + .toggle {
@@ -251,9 +272,9 @@ input[type="color"] {
   }
   
   input:checked + .toggle:before {
-    -webkit-transform: translateX(64px);
-    -ms-transform: translateX(64px);
-    transform: translateX(64px);
+    -webkit-transform: translateX(24px);
+    -ms-transform: translateX(24px);
+    transform: translateX(24px);
   }
   
   /* Rounded sliders */

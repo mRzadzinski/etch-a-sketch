@@ -8,7 +8,7 @@ div.classList.add('grid-square');
 
 
 function createGrid(value) {
-    // Check values's parity
+    // Check parity
     let a = value;
     if (a % 2 !== 0) {
         a += 1;
@@ -37,11 +37,6 @@ slider.onchange = function() {
     createGrid(sliderValue);
 }
 
-
-
-
-
-
 // Update color picker color
 const colorPickerWrapper = document.querySelector('.color-picker-wrapper');
 const colorPicker = document.querySelector('.color-picker');
@@ -49,11 +44,4 @@ const colorPicker = document.querySelector('.color-picker');
 colorPickerWrapper.style.backgroundColor = colorPicker.value;
 colorPicker.onchange = function() {
     colorPickerWrapper.style.backgroundColor = colorPicker.value;
-
 }
-
-
-// Github icon animation
-const git = document.querySelector('#github');
-git.addEventListener('mouseover', (e) => git.classList.add('git'));
-git.addEventListener('mouseleave', (e) => git.classList.remove('git'));

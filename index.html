@@ -25,12 +25,35 @@
 
         <div class="container">
 
-            <div class="top">
-                <div></div>
+            <div class="top">Etch A Sketch</div>
+                
 
+            <div class="middle">
+
+                <div class="left">
+                    <div class="color-picker-wrapper buttons normal-mode">
+                        <input class="color-picker" type="color" name="color-picker" value="#464646">
+                    </div>
+                    <div class="lighten buttons normal-mode">
+                        <img class="arrow up" src="./img/arrow.png" alt="arrow">
+                    </div>
+                    <div class="darken buttons normal-mode">
+                        <img class="arrow down" src="./img/arrow.png" alt="arrow">
+                    </div>
+                    <div class="eraser buttons normal-mode">
+                        <img id="eraser" src="./img/eraser.png" alt="eraser">
+                    </div>
+                </div>
+
+                <div class="grid-container"></div>
+                <div class="right"></div>
+            </div>
+
+            <div class="bottom">
+                <div></div>
                 <div class="toggle-container">
 
-                    <div class="normal">NORMAL</div>
+                    <div class="normal"></div>
 
                     <div class="switch-container">
                         <label class="switch">
@@ -39,33 +62,12 @@
                         </label>
                     </div>
 
-                    <div class="impressionist">IMPRESSIONIST</div>
+                    <div class="impressionist">Claude Monet</div>
                 </div>
                 
                 <input class="slider" type="range" min="16" max="64" value="16">
             </div>
-
-            <div class="middle">
-
-                <div class="left">
-                    <div>
-                        <div class="color-picker-wrapper">
-                            <input class="color-picker normal-mode" type="color" name="color-picker" value="#464646">
-                        </div>
-                        <div class="instruction normal-mode">PICK <br> COLOR</div>
-                    </div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    
-                    
-                </div>
-
-                <div class="grid-container"></div>
-                <div class="right"></div>
             </div>
-
-            <div class="bottom">Etch A Sketch</div>
         </div>
 
         <div class="footer">
