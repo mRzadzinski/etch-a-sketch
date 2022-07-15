@@ -197,14 +197,14 @@ input[type="color"] {
     width: 45px;
     height: 45px;
     border-radius: 45px;
-    background: #b60101;
+    background: #989898;
 }
 
 .slider::-moz-slider-thumb {
     width: 45px;
     height: 45px;
     border-radius: 45px;
-    background: #b60101;
+    background: #989898;
 }
 
 .bottom {
@@ -275,7 +275,7 @@ input[type="color"] {
     width: 18px;
     left: 4px;
     bottom: 4px;
-    background-color: #b60101;
+    background-color: #494949;
     -webkit-transition: .4s;
     transition: .4s;
   }
