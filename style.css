@@ -29,7 +29,7 @@ body {
 .top,
 .bottom {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 94px;
 }
@@ -88,18 +88,12 @@ body {
     transform: scale(1);
 }
 
-#rainbow-container {
+#rainbow {
     height: 65px;
     width: 65px;
-    margin: -102px 0 0 3px;
-    background-color: rgb(173, 123, 35);
-}
-
-#rainbow {
-    height: 100%;
-    width: 100%;
     border-radius: 80px;
     opacity: 0.60;
+    margin: 11px 0 0 15px;
 }
 
 .monet-mode {
@@ -214,7 +208,6 @@ input[type="color"] {
 }
 
 .bottom {
-    justify-content: space-between;
     font-size: 28px;
 }
 
