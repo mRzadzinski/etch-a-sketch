@@ -48,24 +48,24 @@ body {
 }
 
 #reset {
-    margin: 11px 15px 0 0;
+    margin-right: -38px;
 }
 
 #reset-image {
     width: 70%;
     height: 70%;
-    margin: 0 -2px 11px 0;
+    margin: 10px -3px 0 0;
     transform: rotate(90deg);
 
 }
 
 .toggle-container {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 390px;
     margin-right: -225px;
     font-size: 20px;
-    width: 1080px;
+    width: 1084px;
 }
 
 .switch-container {
@@ -73,6 +73,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 7px;
+    width: 300px;
 }
 
 .left,
