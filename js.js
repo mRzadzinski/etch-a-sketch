@@ -121,7 +121,7 @@ eraser.addEventListener('click', (e) => {
 });
 
 const resetButton = document.querySelector('#reset');
-resetButton.addEventListener('click', (e) => resetFunction());
+resetButton.addEventListener('click', (e) => reset());
 
 function reset() {
     gridSquares.forEach(square => square.style.backgroundColor = gridContainer.style.backgroundColor);
