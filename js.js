@@ -27,6 +27,25 @@ function removeGrid() {
     gridContainer.innerHTML = '';
 }
 
+// Color picker functionality
+const colorPickerWrapper = document.querySelector('.color-picker-wrapper');
+const colorPicker = document.querySelector('.color-picker');
+let colorPickerColor = colorPicker.value;
+let currentColor = colorPickerColor;
+
+colorPickerWrapper.style.backgroundColor = colorPickerColor;
+
+// Update background color
+colorPicker.onchange = function() {
+    colorPickerColor = colorPicker.value;
+    colorPickerWrapper.style.backgroundColor = colorPickerColor;
+    currentColor = colorPickerColor;
+}
+
+colorPicker.onclick = function() {
+    currentColor = colorPickerColor;
+};
+
 // Get slider value
 function updateGridSquares() {
     gridSquares = document.querySelectorAll('.grid-square');
@@ -77,34 +96,21 @@ function toggleModes() {
     }
 }
 
-// Update color picker background color
-const colorPickerWrapper = document.querySelector('.color-picker-wrapper');
-const colorPicker = document.querySelector('.color-picker');
-let colorPickerColor;
-let currentColor;
-
-colorPickerWrapper.style.backgroundColor = colorPicker.value;
-currentColor = colorPicker.value;
-
-colorPicker.onchange = function() {
-    colorPickerColor = colorPicker.value;
-    colorPickerWrapper.style.backgroundColor = colorPickerColor;
-    currentColor = colorPickerColor;
-}
-
 // Draw section
 
 function refreshDraw() {
-    // Remove obsolete
+    stopDrawing();
+    startDrawing();
+}
+
+function stopDrawing() {
+    gridSquares.forEach(square => square.replaceWith(square.cloneNode(true)));
+    updateGridSquares();
+}
+
+function startDrawing() {
     gridSquares.forEach(square => 
-        square.removeEventListener('mouseover', (e) => 
-        square.style.backgroundColor = currentColor
-        ));
-    // Add for new grid
-    gridSquares.forEach(square => 
-        square.addEventListener('mouseover', (e) => 
-        square.style.backgroundColor = currentColor
-        ));
+        square.addEventListener('mouseover', (e) => square.style.backgroundColor = currentColor));
 }
 
 const eraser = document.querySelector('.eraser');
@@ -116,3 +122,6 @@ const reset = document.querySelector('#reset');
 reset.addEventListener('click', (e) => {
     gridSquares.forEach(square => square.style.backgroundColor = gridContainer.style.backgroundColor)
 });
+
+window.onmousedown = stopDrawing;
+window.onmouseup = startDrawing;
