@@ -2,6 +2,7 @@
 const gridContainer = document.querySelector('.grid-container');
 const rowContainer = document.createElement('div');
 const div = document.createElement('div');
+let gridSquares;
 
 rowContainer.classList.add('row-container');
 div.classList.add('grid-square');
@@ -27,23 +28,22 @@ function removeGrid() {
 }
 
 // Get slider value
+function updateGridSquares() {
+    gridSquares = document.querySelectorAll('.grid-square');
+}
+
 let slider = document.querySelector('.slider');
 let sliderValue = slider.value;
 createGrid(sliderValue);
+updateGridSquares();
+refreshDraw();
 
 slider.onchange = function() {
     sliderValue = this.value;
     removeGrid();
     createGrid(sliderValue);
-}
-
-// Update color picker background color
-const colorPickerWrapper = document.querySelector('.color-picker-wrapper');
-const colorPicker = document.querySelector('.color-picker');
-
-colorPickerWrapper.style.backgroundColor = colorPicker.value;
-colorPicker.onchange = function() {
-    colorPickerWrapper.style.backgroundColor = colorPicker.value;
+    updateGridSquares();
+    refreshDraw();
 }
 
 // Toggle modes section
@@ -76,3 +76,43 @@ function toggleModes() {
         monetModeButtons.forEach(button => button.style.display = 'none');
     }
 }
+
+// Update color picker background color
+const colorPickerWrapper = document.querySelector('.color-picker-wrapper');
+const colorPicker = document.querySelector('.color-picker');
+let colorPickerColor;
+let currentColor;
+
+colorPickerWrapper.style.backgroundColor = colorPicker.value;
+currentColor = colorPicker.value;
+
+colorPicker.onchange = function() {
+    colorPickerColor = colorPicker.value;
+    colorPickerWrapper.style.backgroundColor = colorPickerColor;
+    currentColor = colorPickerColor;
+}
+
+// Draw section
+
+function refreshDraw() {
+    // Remove obsolete
+    gridSquares.forEach(square => 
+        square.removeEventListener('mouseover', (e) => 
+        square.style.backgroundColor = currentColor
+        ));
+    // Add for new grid
+    gridSquares.forEach(square => 
+        square.addEventListener('mouseover', (e) => 
+        square.style.backgroundColor = currentColor
+        ));
+}
+
+const eraser = document.querySelector('.eraser');
+eraser.addEventListener('click', (e) => {
+    currentColor = gridContainer.style.backgroundColor;
+});
+
+const reset = document.querySelector('#reset');
+reset.addEventListener('click', (e) => {
+    gridSquares.forEach(square => square.style.backgroundColor = gridContainer.style.backgroundColor)
+});

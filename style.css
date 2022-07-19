@@ -39,6 +39,26 @@ body {
     font-family: 'Patrick Hand SC', cursive;
 }
 
+#rainbow {
+    height: 65px;
+    width: 65px;
+    border-radius: 80px;
+    opacity: 0.60;
+    margin: 11px 0 0 15px;
+}
+
+#reset {
+    margin: 11px 15px 0 0;
+}
+
+#reset-image {
+    width: 70%;
+    height: 70%;
+    margin: 0 -2px 11px 0;
+    transform: rotate(90deg);
+
+}
+
 .toggle-container {
     display: flex;
     align-items: center;
@@ -86,14 +106,6 @@ body {
 
 .buttons:active {
     transform: scale(1);
-}
-
-#rainbow {
-    height: 65px;
-    width: 65px;
-    border-radius: 80px;
-    opacity: 0.60;
-    margin: 11px 0 0 15px;
 }
 
 .monet-mode {
