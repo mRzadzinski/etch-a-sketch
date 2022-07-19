@@ -89,10 +89,12 @@ function toggleModes() {
     if (toggle.checked) {
         normalModeButtons.forEach(button => button.style.display = 'none');
         monetModeButtons.forEach(button => button.style.display = 'block');
+        reset();
 
     } else {
         normalModeButtons.forEach(button => button.style.display = 'block');
         monetModeButtons.forEach(button => button.style.display = 'none');
+        reset();
     }
 }
 
@@ -118,10 +120,12 @@ eraser.addEventListener('click', (e) => {
     currentColor = gridContainer.style.backgroundColor;
 });
 
-const reset = document.querySelector('#reset');
-reset.addEventListener('click', (e) => {
-    gridSquares.forEach(square => square.style.backgroundColor = gridContainer.style.backgroundColor)
-});
+const resetButton = document.querySelector('#reset');
+resetButton.addEventListener('click', (e) => resetFunction());
+
+function reset() {
+    gridSquares.forEach(square => square.style.backgroundColor = gridContainer.style.backgroundColor);
+}
 
 window.onmousedown = stopDrawing;
 window.onmouseup = startDrawing;
