@@ -1,5 +1,8 @@
-// Create grid
+// Create grid section
+
 const gridContainer = document.querySelector('.grid-container');
+// Set background color to access it later for percentage modifications
+gridContainer.style.backgroundColor = 'rgb(154, 163, 180)';
 const rowContainer = document.createElement('div');
 const div = document.createElement('div');
 let gridSquares;
@@ -19,6 +22,7 @@ function createGrid(value) {
         gridContainer.appendChild(rowContainer.cloneNode());
         for (let j = 0; j < (value * 1.5); j++) {
             gridContainer.lastChild.appendChild(div.cloneNode());
+            gridContainer.lastChild.lastChild.style.backgroundColor = gridContainer.style.backgroundColor;
         }
     }
 }
@@ -99,6 +103,13 @@ function toggleModes() {
 }
 
 // Draw section
+
+function refreshDraw() {
+    drawOnMousedown();
+    drawWhenMoving();
+    stopOnMouseup();
+}
+
 let mouseIsDown;
 
 function drawOnMousedown() {
@@ -128,12 +139,6 @@ function stopOnMouseup() {
         }));
 }
 
-function refreshDraw() {
-    drawOnMousedown();
-    drawWhenMoving();
-    stopOnMouseup();
-}
-
 const eraser = document.querySelector('.eraser');
 eraser.addEventListener('click', (e) => {
     currentColor = gridContainer.style.backgroundColor;
@@ -144,4 +149,79 @@ resetButton.addEventListener('click', (e) => reset());
 
 function reset() {
     gridSquares.forEach(square => square.style.backgroundColor = gridContainer.style.backgroundColor);
+}
+
+function prepareGridForNewListener() {
+    removeGridListeners();
+    updateGridSquares();
+}
+
+function removeGridListeners() {
+    gridSquares.forEach(square => {
+        squareClone = square.cloneNode();
+        square.replaceWith(squareClone);
+    });
+}
+
+// Lighten and darken section
+const lighten = document.querySelector('.lighten');
+const darken = document.querySelector('.darken');
+
+lighten.addEventListener('click', (e) => addLightenListener());
+darken.addEventListener('click', (e) => addDarkenListener());
+
+
+
+function addLightenListener() {
+    prepareGridForNewListener()
+    gridSquares.forEach(square => 
+        square.addEventListener('mousedown', (e) => 
+        square.style.backgroundColor = shadeColor(square.style.backgroundColor, 2)));
+}   
+
+function addDarkenListener() {
+    prepareGridForNewListener()
+    gridSquares.forEach(square => 
+        square.addEventListener('click', (e) => 
+        square.style.backgroundColor = shadeColor(square.style.backgroundColor, -2)));
+}   
+
+function shadeColor(color, percent) {
+    // Extract RGB values from format: rgb(color, color, color)
+    let firstCommaPosition = color.indexOf(',');
+    let secondCommaPosition = color.indexOf(',', (firstCommaPosition + 2));
+    let closingBracketPosition = color.indexOf(')', (secondCommaPosition + 2))
+
+    let R = color.substring(4, firstCommaPosition);
+    let G = color.substring((firstCommaPosition + 2), secondCommaPosition);
+    let B = color.substring((secondCommaPosition + 2), closingBracketPosition);
+
+    console.log(R, G, B)
+    // Increment or decrement value to avoid rounding small numbers
+    R = adjustRGB(R, percent);
+    G = adjustRGB(G, percent);
+    B = adjustRGB(B, percent);
+
+    R = R * (100 + percent) / 100;
+    G = G * (100 + percent) / 100;
+    B = B * (100 + percent) / 100;
+
+    R = (R < 255) ? R : 255;
+    G = (G < 255) ? G : 255;
+    B = (B < 255) ? B : 255;
+
+    return 'rgb(' + R + ', ' + G + ', ' + B + ')';
+}
+
+function adjustRGB(value, percent) {
+    if (percent < 0) {
+        if (value <= 50) {
+            value -= 2;
+        }
+    } else if (percent > 0) {
+        if (value < 2) {
+            value = 50;
+        }
+    }
+    return value;
 }
