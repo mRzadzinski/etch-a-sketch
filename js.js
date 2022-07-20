@@ -99,20 +99,39 @@ function toggleModes() {
 }
 
 // Draw section
+let mouseIsDown;
+
+function drawOnMousedown() {
+    gridSquares.forEach(square => 
+        square.addEventListener('mousedown', (e) => {
+            mouseIsDown = true;
+            square.style.backgroundColor = currentColor;
+        }));
+}
+
+function drawWhenMoving() {
+    gridSquares.forEach(square => 
+        square.addEventListener('mousemove', (e) => {
+            if (mouseIsDown) {
+                square.style.backgroundColor = currentColor;
+            }
+        }));
+}
+
+function stopOnMouseup() {
+    gridSquares.forEach(square => 
+        square.addEventListener('mouseup', (e) => {
+            if (mouseIsDown) {
+                square.style.backgroundColor = currentColor;
+                mouseIsDown = false;
+            }
+        }));
+}
 
 function refreshDraw() {
-    stopDrawing();
-    startDrawing();
-}
-
-function stopDrawing() {
-    gridSquares.forEach(square => square.replaceWith(square.cloneNode(true)));
-    updateGridSquares();
-}
-
-function startDrawing() {
-    gridSquares.forEach(square => 
-        square.addEventListener('mouseover', (e) => square.style.backgroundColor = currentColor));
+    drawOnMousedown();
+    drawWhenMoving();
+    stopOnMouseup();
 }
 
 const eraser = document.querySelector('.eraser');
@@ -126,6 +145,3 @@ resetButton.addEventListener('click', (e) => reset());
 function reset() {
     gridSquares.forEach(square => square.style.backgroundColor = gridContainer.style.backgroundColor);
 }
-
-window.onmousedown = stopDrawing;
-window.onmouseup = startDrawing;
