@@ -47,6 +47,7 @@ colorPicker.onchange = function() {
 }
 
 colorPicker.onclick = function() {
+    prepareGridAndRefreshDraw();
     currentColor = colorPickerColor;
 };
 
@@ -110,6 +111,11 @@ function refreshDraw() {
     stopOnMouseup();
 }
 
+function prepareGridAndRefreshDraw() {
+    prepareGridForNewListener();
+    refreshDraw();
+}
+
 let mouseIsDown;
 
 function drawOnMousedown() {
@@ -141,11 +147,15 @@ function stopOnMouseup() {
 
 const eraser = document.querySelector('.eraser');
 eraser.addEventListener('click', (e) => {
+    prepareGridAndRefreshDraw();
     currentColor = gridContainer.style.backgroundColor;
 });
 
 const resetButton = document.querySelector('#reset');
-resetButton.addEventListener('click', (e) => reset());
+resetButton.addEventListener('click', (e) => {
+    prepareGridAndRefreshDraw();
+    reset();
+});
 
 function reset() {
     gridSquares.forEach(square => square.style.backgroundColor = gridContainer.style.backgroundColor);
@@ -166,25 +176,58 @@ function removeGridListeners() {
 // Lighten and darken section
 const lighten = document.querySelector('.lighten');
 const darken = document.querySelector('.darken');
+let intervalRate = 80;
+let shadePercentage = 6;
+let lightenPercentage = shadePercentage;
+let darkenPercentage = shadePercentage * (-1);
 
-lighten.addEventListener('click', (e) => addLightenListener());
-darken.addEventListener('click', (e) => addDarkenListener());
+lighten.addEventListener('click', (e) => addShadeListener(lightenPercentage, intervalRate));
+darken.addEventListener('click', (e) => addShadeListener(darkenPercentage, intervalRate));
 
+let lightenInterval;
+function addShadeListener(percentage, intervalRate) {
+    prepareGridForNewListener();
+    shadeOnMousedown(percentage, intervalRate);
+    shadeOnMouseover(percentage, intervalRate);
+    clearShadeOnMouseout();
+    clearShadeOnMouseup()
+}
 
-
-function addLightenListener() {
-    prepareGridForNewListener()
+function shadeOnMousedown(percentage, intervalRate) {
     gridSquares.forEach(square => 
-        square.addEventListener('mousedown', (e) => 
-        square.style.backgroundColor = shadeColor(square.style.backgroundColor, 2)));
-}   
+        square.addEventListener('mousedown', (e) => {
+            mouseIsDown = true; 
+            lightenInterval = setInterval(function() {
+                square.style.backgroundColor = shadeColor(square.style.backgroundColor, percentage);
+            }, intervalRate)
+        }));
+}
 
-function addDarkenListener() {
-    prepareGridForNewListener()
+function shadeOnMouseover(percentage, intervalRate) {
+        gridSquares.forEach(square => 
+            square.addEventListener('mouseover', (e) => {
+                if (mouseIsDown) {
+                    lightenInterval = setInterval(function() {
+                        square.style.backgroundColor = shadeColor(square.style.backgroundColor, percentage);
+                        }, intervalRate)
+                }
+            }));
+}
+
+function clearShadeOnMouseout() {
+        gridSquares.forEach(square => 
+            square.addEventListener('mouseout', (e) => clearInterval(lightenInterval)));
+}
+
+function clearShadeOnMouseup() {
     gridSquares.forEach(square => 
-        square.addEventListener('click', (e) => 
-        square.style.backgroundColor = shadeColor(square.style.backgroundColor, -2)));
-}   
+        square.addEventListener('mouseup', (e) => {
+            if (mouseIsDown) {
+                mouseIsDown = false;
+                clearInterval(lightenInterval);
+            }
+        }));
+}
 
 function shadeColor(color, percent) {
     // Extract RGB values from format: rgb(color, color, color)
