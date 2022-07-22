@@ -60,7 +60,7 @@ function updateButtonColor() {
 }
 
 // Update background color
-colorPicker.onchange = function() {
+colorPicker.oninput = function() {
     colorPickerColor = colorPicker.value;
     currentColor = colorPickerColor;
     updateButtonColor();
