@@ -43,8 +43,6 @@ let currentColor = colorPickerColor;
 updateButtonColor();
 function updateButtonColor() {
     colorPickerWrapper.style.backgroundColor = colorPickerColor;
-    lighten.style.backgroundColor = shadeColor(colorPickerColor, 200);
-    darken.style.backgroundColor = shadeColor(colorPickerColor, -50);
 }
 
 // Update background color

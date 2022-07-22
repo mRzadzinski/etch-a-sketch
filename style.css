@@ -101,7 +101,7 @@ body {
     border-radius: 60px;
     transition: 0.1s;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.3);
-    background-color: #E2D4A1;
+    background-color: #F9E4E7;
 }
 
 .buttons:hover {
@@ -118,19 +118,26 @@ body {
     width: 47px;
 }
 
-.arrow {
-    height: 60%;
-    width: 60%;
+.lighten {
+    background-color: #F6D7DC;
 }
 
-.arrow.up {
+.darken {
+    background-color: #9E757B;
+}
+
+.sun,
+.moon {
+    height: 70%;
+    width: 70%;
+}
+
+.sun {
     margin-top: 10px;
-    transform: rotate(-90deg);
 }
 
-.arrow.down {
-    transform: rotate(90deg);
-    margin-top: 14px;
+.moon {
+    margin: 9px 6px 0 0;
 }
 
 .eraser {
@@ -223,7 +230,7 @@ input[type="color"] {
     width: 45px;
     height: 45px;
     border-radius: 45px;
-    background: #E2D4A1;
+    background: #ffdf6b;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.3);
 }
 
