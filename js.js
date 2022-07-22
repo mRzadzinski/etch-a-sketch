@@ -2,7 +2,7 @@
 
 const gridContainer = document.querySelector('.grid-container');
 // Set background color to access it later for percentage modifications
-gridContainer.style.backgroundColor = 'rgb(154, 163, 180)';
+gridContainer.style.backgroundColor = 'rgb(236, 236, 236)';
 const rowContainer = document.createElement('div');
 const div = document.createElement('div');
 let gridSquares;
@@ -34,16 +34,24 @@ function removeGrid() {
 // Color picker functionality
 const colorPickerWrapper = document.querySelector('.color-picker-wrapper');
 const colorPicker = document.querySelector('.color-picker');
+const lighten = document.querySelector('.lighten');
+const darken = document.querySelector('.darken');
 let colorPickerColor = colorPicker.value;
+
 let currentColor = colorPickerColor;
 
-colorPickerWrapper.style.backgroundColor = colorPickerColor;
+updateButtonColor();
+function updateButtonColor() {
+    colorPickerWrapper.style.backgroundColor = colorPickerColor;
+    lighten.style.backgroundColor = shadeColor(colorPickerColor, 200);
+    darken.style.backgroundColor = shadeColor(colorPickerColor, -50);
+}
 
 // Update background color
 colorPicker.onchange = function() {
     colorPickerColor = colorPicker.value;
-    colorPickerWrapper.style.backgroundColor = colorPickerColor;
     currentColor = colorPickerColor;
+    updateButtonColor();
 }
 
 colorPicker.onclick = function() {
@@ -81,7 +89,7 @@ monetModeButton.classList.add('buttons', 'monet-mode');
 let monetModeButtonsFragment = document.createDocumentFragment();
 let monetModeButtonsArray = [];
 
-for (let i = 0; i < 8; i++) {
+for (let i = 0; i < 10; i++) {
     monetModeButtonsArray[i] = monetModeButton.cloneNode();
 }
 monetModeButtonsArray.forEach(button => monetModeButtonsFragment.appendChild(button));
@@ -174,8 +182,6 @@ function removeGridListeners() {
 }
 
 // Lighten and darken section
-const lighten = document.querySelector('.lighten');
-const darken = document.querySelector('.darken');
 let intervalRate = 80;
 let shadePercentage = 6;
 let lightenPercentage = shadePercentage;
@@ -197,6 +203,7 @@ function shadeOnMousedown(percentage, intervalRate) {
     gridSquares.forEach(square => 
         square.addEventListener('mousedown', (e) => {
             mouseIsDown = true; 
+            square.style.backgroundColor = shadeColor(square.style.backgroundColor, percentage);
             lightenInterval = setInterval(function() {
                 square.style.backgroundColor = shadeColor(square.style.backgroundColor, percentage);
             }, intervalRate)
@@ -230,37 +237,63 @@ function clearShadeOnMouseup() {
 }
 
 function shadeColor(color, percent) {
-    // Extract RGB values from format: rgb(color, color, color)
-    let firstCommaPosition = color.indexOf(',');
-    let secondCommaPosition = color.indexOf(',', (firstCommaPosition + 2));
-    let closingBracketPosition = color.indexOf(')', (secondCommaPosition + 2))
+    // Extract RGB values from hexadecimal format: #xxxxxx
+    if (color[0] === '#') {
+        let R = parseInt(color.substring(1,3),16);
+        let G = parseInt(color.substring(3,5),16);
+        let B = parseInt(color.substring(5,7),16);
 
-    let R = color.substring(4, firstCommaPosition);
-    let G = color.substring((firstCommaPosition + 2), secondCommaPosition);
-    let B = color.substring((secondCommaPosition + 2), closingBracketPosition);
+        let RGB = RbgCalculations(R, G, B, percent);
 
-    console.log(R, G, B)
-    // Increment or decrement value to avoid rounding small numbers
+        let RR = ((RGB[0].toString(16).length == 1) ? "0" + RGB[0].toString(16) : RGB[0].toString(16));
+        let GG = ((RGB[1].toString(16).length == 1)? "0" + RGB[1].toString(16) : RGB[1].toString(16));
+        let BB = ((RGB[2].toString(16).length == 1) ? "0" + RGB[2].toString(16) : RGB[2].toString(16));
+
+       
+
+        return '#' + RR + GG + BB;
+
+    // // Extract RGB values from decimal format: rgb(color, color, color)
+    } else if (color[0] === 'r') {
+        let firstCommaPosition = color.indexOf(',');
+        let secondCommaPosition = color.indexOf(',', (firstCommaPosition + 2));
+        let closingBracketPosition = color.indexOf(')', (secondCommaPosition + 2))
+    
+        let R = color.substring(4, firstCommaPosition);
+        let G = color.substring((firstCommaPosition + 2), secondCommaPosition);
+        let B = color.substring((secondCommaPosition + 2), closingBracketPosition);
+
+        let RGB = RbgCalculations(R, G, B, percent);
+        return 'rgb(' + RGB[0] + ', ' + RGB[1] + ', ' + RGB[2] + ')';
+    }
+}
+
+function RbgCalculations(R, G, B, percent) {
     R = adjustRGB(R, percent);
     G = adjustRGB(G, percent);
     B = adjustRGB(B, percent);
 
-    R = R * (100 + percent) / 100;
-    G = G * (100 + percent) / 100;
-    B = B * (100 + percent) / 100;
+    R = Math.round(R * (100 + percent) / 100);
+    G = Math.round(G * (100 + percent) / 100);
+    B = Math.round(B * (100 + percent) / 100);
 
     R = (R < 255) ? R : 255;
     G = (G < 255) ? G : 255;
     B = (B < 255) ? B : 255;
 
-    return 'rgb(' + R + ', ' + G + ', ' + B + ')';
+    let RGB = [R, G, B];
+    return RGB;
 }
 
+// Increment or decrement value to avoid rounding small numbers
 function adjustRGB(value, percent) {
     if (percent < 0) {
-        if (value <= 50) {
+        if (value <= 50 && value >= 2) {
             value -= 2;
+        } else if (value < 2) {
+            value = 0;
         }
+
     } else if (percent > 0) {
         if (value < 2) {
             value = 50;
