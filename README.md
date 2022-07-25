@@ -7,8 +7,8 @@ Application simulates an old-school drawing toy enhanced by digital functions.
 
 ## Features
 * Drawing!
-* Pick own color from 'color picker'
-* Adjust grid size with slider
+* Color picker
+* Grid size slider
 * Lighten smoothly
 * Darken smoothly
 * Rainbow mode (random out of 120 matching colors)
@@ -16,7 +16,7 @@ Application simulates an old-school drawing toy enhanced by digital functions.
 * Clear canvas
 * **Claude Monet mode:**
     * 10 impressionist buttons
-    * Each button represents 12 colors (randomly chosen) from a given palette
+    * 12 colors from a given palette each
 
 Artwork from app:
 ![haystacks-drawing](./img/haystacks-drawing.png)
