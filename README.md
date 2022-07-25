@@ -16,7 +16,7 @@ Application simulates an old-school drawing toy enhanced by digital functions.
 * Clear canvas
 * **Claude Monet mode:**
     * 10 impressionist buttons
-    * 12 colors from a given palette each
+    * 12 colors from a given palette each (randomly chosen)
 
 Artwork from app:
 ![haystacks-drawing](./img/haystacks-drawing.png)
