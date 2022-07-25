@@ -1,6 +1,6 @@
 # Etch A Sketch
 
-![interface](./img/interfaces.png)
+![interface](./img/interface.png)
 [Draw now!](https://mrzadzinski.github.io/etch-a-sketch/)
 
 Application simulates an old-school drawing toy enhanced by digital functions.
