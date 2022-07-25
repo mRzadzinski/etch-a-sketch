@@ -131,7 +131,8 @@ body {
 }
 
 .sun,
-.moon {
+.moon,
+#eraser {
     height: 70%;
     width: 70%;
 }
@@ -149,8 +150,6 @@ body {
 }
 
 #eraser {
-    width: 70%;
-    height: 70%;
     margin: 8px 3px 0 0;
 }
 
@@ -192,12 +191,6 @@ input[type="color"] {
     border: solid 1px rgb(177, 177, 177);
     flex: 1;
     margin: 0 -1px -1px 0;
-}
-
-.right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .slider {
@@ -242,34 +235,6 @@ input[type="color"] {
     font-size: 28px;
 }
 
-
-
-
-
-
-.footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 45px;
-    width: 100vw;
-    text-align: center;
-    font-size: 15px;
-    font-family: 'Roboto', sans-serif;
-}
-    
-
-#github {
-    height: 27px;
-    width: 27px;
-    padding-bottom: 0.2vh;
-    transition: 0.3s;
-}
-
-#github:hover {
-    transform: scale(1.1);
-}
-
 /* The switch - the box around the slider */
 .switch {
     position: relative;
@@ -286,7 +251,7 @@ input[type="color"] {
     height: 0;
   }
   
-  /* The slider */
+  /* Toggle frame */
   .toggle {
     position: absolute;
     cursor: pointer;
@@ -298,9 +263,9 @@ input[type="color"] {
     -webkit-transition: .4s;
     transition: .4s;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.3);
-
   }
   
+  /* Toggle ball */
   .toggle:before {
     position: absolute;
     content: "";
@@ -331,3 +296,26 @@ input[type="color"] {
   .toggle.round:before {
     border-radius: 50%;
   }
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    width: 100vw;
+    text-align: center;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+}
+    
+
+#github {
+    height: 27px;
+    width: 27px;
+    padding-bottom: 0.2vh;
+    transition: 0.3s;
+}
+
+#github:hover {
+    transform: scale(1.1);
+}

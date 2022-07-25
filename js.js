@@ -15,15 +15,13 @@ const allColors = [colorSet1, colorSet2, colorSet3, colorSet4, colorSet5, colorS
 // Create grid section
 
 const gridContainer = document.querySelector('.grid-container');
-// Set background color to access it later for percentage modifications
-gridContainer.style.backgroundColor = 'rgb(236, 236, 236)';
 const rowContainer = document.createElement('div');
 const div = document.createElement('div');
 let gridSquares;
 
+gridContainer.style.backgroundColor = 'rgb(236, 236, 236)';
 rowContainer.classList.add('row-container');
 div.classList.add('grid-square');
-
 
 function createGrid(value) {
     // Check parity
@@ -48,22 +46,19 @@ function removeGrid() {
 // Color picker functionality
 const colorPickerWrapper = document.querySelector('.color-picker-wrapper');
 const colorPicker = document.querySelector('.color-picker');
-const lighten = document.querySelector('.lighten');
-const darken = document.querySelector('.darken');
+
 let colorPickerColor = colorPicker.value;
-
 let currentColor = colorPickerColor;
+updateColorPickerWrapperColor();
 
-updateButtonColor();
-function updateButtonColor() {
+function updateColorPickerWrapperColor() {
     colorPickerWrapper.style.backgroundColor = colorPickerColor;
 }
 
-// Update background color
 colorPicker.oninput = function() {
     colorPickerColor = colorPicker.value;
     currentColor = colorPickerColor;
-    updateButtonColor();
+    updateColorPickerWrapperColor();
 }
 
 colorPicker.onclick = function() {
@@ -72,22 +67,22 @@ colorPicker.onclick = function() {
     currentColor = colorPickerColor;
 };
 
-// Get slider value
-function updateGridSquares() {
-    gridSquares = document.querySelectorAll('.grid-square');
-}
-
+// Grid slider section
 let slider = document.querySelector('.slider');
 let sliderValue = slider.value;
 createGrid(sliderValue);
-updateGridSquares();
+refreshGridSquares();
 drawNormal();
+
+function refreshGridSquares() {
+    gridSquares = document.querySelectorAll('.grid-square');
+}
 
 slider.onchange = function() {
     sliderValue = this.value;
     removeGrid();
     createGrid(sliderValue);
-    updateGridSquares();
+    refreshGridSquares();
     drawNormal();
 }
 
@@ -107,50 +102,39 @@ for (let i = 1; i < 11; i++) {
     monetModeButtonsArray[i].setAttribute('id', `button${i}`);
 }
 
-
 monetModeButtonsArray.forEach(button => monetModeButtonsFragment.appendChild(button));
 left.appendChild(monetModeButtonsFragment);
 let monetModeButtons = document.querySelectorAll('.monet-mode');
 
-toggle.addEventListener('change', ((e) => setTimeout(toggleModes, 100)));
+monetModeButtons[0].style.backgroundColor = colorSet1[11];
+monetModeButtons[1].style.backgroundColor = colorSet2[8];
+monetModeButtons[2].style.backgroundColor = colorSet3[3];
+monetModeButtons[3].style.backgroundColor = colorSet4[9];
+monetModeButtons[4].style.backgroundColor = colorSet5[1];
+monetModeButtons[5].style.backgroundColor = colorSet6[1];
+monetModeButtons[6].style.backgroundColor = colorSet7[4];
+monetModeButtons[7].style.backgroundColor = colorSet8[9];
+monetModeButtons[8].style.backgroundColor = colorSet9[8];
+monetModeButtons[9].style.backgroundColor = colorSet10[1];
 
-let button1 = document.querySelector('#button1');
-let button2 = document.querySelector('#button2');
-let button3 = document.querySelector('#button3');
-let button4 = document.querySelector('#button4');
-let button5 = document.querySelector('#button5');
-let button6 = document.querySelector('#button6');
-let button7 = document.querySelector('#button7');
-let button8 = document.querySelector('#button8');
-let button9 = document.querySelector('#button9');
-let button10 = document.querySelector('#button10');
+let currentMonetButton;
+
+for (let i = 0; i < 10; i++) {
+    monetModeButtons[i].addEventListener('click', (e) => {
+        currentMonetButton = i;
+        clearGridListeners();
+        drawRandom();
+    });
+}
+
+// Delay switch to sync with toggle animation
+toggle.addEventListener('change', ((e) => setTimeout(toggleModes, 100)));
 
 function toggleModes() {
     if (toggle.checked) {
         normalModeButtons.forEach(button => button.style.display = 'none');
         monetModeButtons.forEach(button => button.style.display = 'block');
         resetGridColor();
-
-
-        document.querySelector('#button1').style.backgroundColor = colorSet1[11];
-        document.querySelector('#button2').style.backgroundColor = colorSet2[8];
-        document.querySelector('#button3').style.backgroundColor = colorSet3[3];
-        document.querySelector('#button4').style.backgroundColor = colorSet4[9];
-        document.querySelector('#button5').style.backgroundColor = colorSet5[1];
-        document.querySelector('#button6').style.backgroundColor = colorSet6[1];
-        document.querySelector('#button7').style.backgroundColor = colorSet7[4];
-        document.querySelector('#button8').style.backgroundColor = colorSet8[9];
-        document.querySelector('#button9').style.backgroundColor = colorSet9[8];
-        document.querySelector('#button10').style.backgroundColor = colorSet10[1];
-
-        for (let i = 0; i < 10; i++) {
-            monetModeButtons[i].addEventListener('click', (e) => {
-                currentMonetButton = i;
-                clearGridListeners();
-                drawRandom();
-            });
-        }
-
     } else {
         normalModeButtons.forEach(button => button.style.display = 'block');
         monetModeButtons.forEach(button => button.style.display = 'none');
@@ -161,25 +145,11 @@ function toggleModes() {
 }
 
 // Draw section
-let currentMonetButton;
 let mouseIsDown;
 
-function drawNormal() {
-    drawOnMousedown(colorNormal);
-    drawWhenMoving(colorNormal);
-    stopOnMouseup(colorNormal);
-}
-
-function drawRandom() {
-    drawOnMousedown(colorRandom);
-    drawWhenMoving(colorRandom);
-    stopOnMouseup(colorRandom);
-}
-
-function drawRainbow() {
-    drawOnMousedown(colorRainbow);
-    drawWhenMoving(colorRainbow);
-    stopOnMouseup(colorRainbow);
+function random(max) {
+    let randomNumber = Math.floor(Math.random() * max);
+    return randomNumber;
 }
 
 function colorNormal() {
@@ -196,9 +166,22 @@ function colorRainbow() {
     return currentColor;
 }
 
-function random(max) {
-    let randomNumber = Math.floor(Math.random() * max);
-    return randomNumber;
+function drawNormal() {
+    drawOnMousedown(colorNormal);
+    drawWhenMoving(colorNormal);
+    stopOnMouseup();
+}
+
+function drawRandom() {
+    drawOnMousedown(colorRandom);
+    drawWhenMoving(colorRandom);
+    stopOnMouseup();
+}
+
+function drawRainbow() {
+    drawOnMousedown(colorRainbow);
+    drawWhenMoving(colorRainbow);
+    stopOnMouseup();
 }
 
 function drawOnMousedown(drawingColor) {
@@ -218,14 +201,19 @@ function drawWhenMoving(drawingColor) {
         }));
 }
 
-function stopOnMouseup(drawingColor) {
+function stopOnMouseup() {
     gridSquares.forEach(square => 
         square.addEventListener('mouseup', (e) => {
             if (mouseIsDown) {
-                square.style.backgroundColor = drawingColor();
                 mouseIsDown = false;
             }
         }));
+}
+
+const rainbowButton = document.querySelector('#rainbow');
+rainbowButton.onclick = function() {
+    clearGridListeners();
+    drawRainbow();
 }
 
 const eraser = document.querySelector('.eraser');
@@ -237,16 +225,8 @@ eraser.addEventListener('click', (e) => {
 
 const resetButton = document.querySelector('#reset');
 resetButton.addEventListener('click', (e) => {
-    clearGridListeners();
-    drawNormal();
     resetGridColor();
 });
-
-const rainbowButton = document.querySelector('#rainbow');
-rainbowButton.onclick = function() {
-    clearGridListeners();
-    drawRainbow();
-}
 
 function resetGridColor() {
     gridSquares.forEach(square => square.style.backgroundColor = gridContainer.style.backgroundColor);
@@ -254,7 +234,7 @@ function resetGridColor() {
 
 function clearGridListeners() {
     removeGridListeners();
-    updateGridSquares();
+    refreshGridSquares();
 }
 
 function removeGridListeners() {
@@ -264,12 +244,11 @@ function removeGridListeners() {
     });
 }
 
-
-
-
-
 // Lighten and darken section
-let intervalRate = 80;
+const lighten = document.querySelector('.lighten');
+const darken = document.querySelector('.darken');
+
+let intervalRate = 80; // milliseconds
 let shadePercentage = 6;
 let lightenPercentage = shadePercentage;
 let darkenPercentage = shadePercentage * (-1);
@@ -326,21 +305,20 @@ function clearShadeOnMouseup() {
 function shadeColor(color, percent) {
     // Extract RGB values from hexadecimal format: #xxxxxx
     if (color[0] === '#') {
-        let R = parseInt(color.substring(1,3),16);
-        let G = parseInt(color.substring(3,5),16);
-        let B = parseInt(color.substring(5,7),16);
+        let R = parseInt(color.substring(1, 3), 16);
+        let G = parseInt(color.substring(3, 5), 16);
+        let B = parseInt(color.substring(5, 7), 16);
 
-        let RGB = RbgCalculations(R, G, B, percent);
+        let RGB = rgbCalculations(R, G, B, percent);
 
+        // Convert to hexadecimal
         let RR = ((RGB[0].toString(16).length == 1) ? "0" + RGB[0].toString(16) : RGB[0].toString(16));
         let GG = ((RGB[1].toString(16).length == 1)? "0" + RGB[1].toString(16) : RGB[1].toString(16));
         let BB = ((RGB[2].toString(16).length == 1) ? "0" + RGB[2].toString(16) : RGB[2].toString(16));
 
-       
-
         return '#' + RR + GG + BB;
 
-    // // Extract RGB values from decimal format: rgb(color, color, color)
+    // // Extract RGB values from decimal format: rgb(number, number, number)
     } else if (color[0] === 'r') {
         let firstCommaPosition = color.indexOf(',');
         let secondCommaPosition = color.indexOf(',', (firstCommaPosition + 2));
@@ -349,13 +327,14 @@ function shadeColor(color, percent) {
         let R = color.substring(4, firstCommaPosition);
         let G = color.substring((firstCommaPosition + 2), secondCommaPosition);
         let B = color.substring((secondCommaPosition + 2), closingBracketPosition);
+        
+        let RGB = rgbCalculations(R, G, B, percent);
 
-        let RGB = RbgCalculations(R, G, B, percent);
         return 'rgb(' + RGB[0] + ', ' + RGB[1] + ', ' + RGB[2] + ')';
     }
 }
 
-function RbgCalculations(R, G, B, percent) {
+function rgbCalculations(R, G, B, percent) {
     R = adjustRGB(R, percent);
     G = adjustRGB(G, percent);
     B = adjustRGB(B, percent);
@@ -388,7 +367,3 @@ function adjustRGB(value, percent) {
     }
     return value;
 }
-
-let arr1 = ['me', 'you'];
-let arr2 = ['they', 'cats'];
-let arrays = [arr1, arr2];
