@@ -27,7 +27,7 @@ Original:
 ## Technologies
 * Javascript
 * HTML
-* CSS
+* CSS (Flexbox)
 
 ## Skills practiced
 * Javascript - DOM Manipulation and Events
